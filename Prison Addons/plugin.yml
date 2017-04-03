@@ -1,0 +1,14 @@
+main: me.maxipad.main.Main
+name: SCPrisonAddons
+version: 1.0
+author: Maxipad_
+commands:
+  ci:
+    description: Clear inventory.
+  silktouch:
+    description: Remove silktouch from tool.
+    aliases: [st]
+  setRate:
+    description: Set rates.
+  nv:
+    description: Toggle night vision.

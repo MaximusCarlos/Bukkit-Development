@@ -1,0 +1,19 @@
+# Prison Addons by Maxipad_
+# (CI) = ClearInventory
+# (ST) = Silktouch
+# (CD) = Custom Drops (Value/1000) = % chance of drop
+(CI) ConfirmTime: '10'
+(CI) ConfirmMessage: '&6Are you sure you want to clear your inventory?%n%Type &b/ci &6again to confirm! &6Expires in &b%time%'
+(CI) InventoryCleared: '&6Inventory Cleared'
+(CI) Bumper: 'True'
+(ST) Prefix: '&c&lST >> '
+(ST) NotTool: '&cHeld item must be a tool.'
+(ST) SilkRemoved: '&cSilk touch has been removed off your &b%tool%&c!'
+(ST) NoSilkTouch: '&cYour tool does not have silk touch.'
+(ST) ConfirmTime: '10'
+(ST) Prompt: '&cAre you sure you want to remove silktouch?%n%&cType &b/st remove &cagain to confirm. Expires in &b%time%'
+(ST) Usage: '&cUsage: &b/st remove'
+GUARDet: '0.5'
+GUARDobby: '1'
+IGet: '2'
+IGobby: '4'
