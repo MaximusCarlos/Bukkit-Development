@@ -1,0 +1,8 @@
+main: me.maxipad.counter.KillCounter
+name: KillCounter
+version: 1.0
+commands:
+  cstats:
+    description: Displays player stats. /cstats <name>
+  counterreload:
+    description: Reloads KitPvP plugin from config.

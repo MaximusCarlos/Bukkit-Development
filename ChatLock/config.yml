@@ -1,0 +1,17 @@
+# ChatLock by Maxipad_ (TheOfficialMaxipad_)
+# Version 1.0
+Lock Message: '&b%p &chas &blocked &cchat!'
+Lock Message without IGN: '&cChat is now &blocked&c!'
+Unlock Message: '&b%p &chas &bunlocked &cchat!'
+Unlock Message without IGN: '&cChat is now &bunlocked&c!'
+Currently Locked: '&cChat is currently &blocked&c!'
+Show IGN that locked: 'True'
+#################################
+Blocked Commands On Chat Lock:
+  - /m
+  - /msg
+  - /w
+  - /whisper
+  - /t
+  - /tell
+  - /me

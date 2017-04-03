@@ -1,0 +1,9 @@
+main: com.maxipad.antiswear.Main
+version: 1.0
+name: MaxAntiSwear
+
+commands:
+  swearlist:
+    description: Lists out AntiSwear words.
+  slreload:
+    description: Reloads config files from disk.

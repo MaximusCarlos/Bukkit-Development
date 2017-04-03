@@ -1,0 +1,23 @@
+# Bounty by Maxipad_
+# Version 1.0
+# Symbols: %player%, %killer%, %bounty%, %a% (apostrofe)
+# Set Broadcast to 'No' if you don't want them to be broascasted, just sent to players in the event.
+BountyCheckCorrectUsage: '&8[&6Bounty&8] &cCorrect Usage: &b/bounty <name>'
+Invalid Player: '&8[&6Bounty&8] &b%player% &chas never logged onto the server!'
+Bounty Info: '&8[&6Bounty&8] &b%player%%a%s &cbounty is: &b%bounty%&c$'
+Killer Message: '&8[&6Bounty&8] &cYou have claimed &b%player%%a%s &cbounty (&b%bounty%$&c)&b!'
+Victim Message: '&8[&6Bounty&8] &b%killer% &chas claimed your bounty (&b%bounty%$&c)&b!'
+BountyAddCorrectUsage1: '&8[&6Bounty&8] &cCorrect usage: &b/bountyadd <name> <amount>'
+BountyAddCorrectUsage2: '&8[&6Bounty&8] &cCorrect usage: &b/bountyadd <name> <amount>'
+BountyAddSuccess: '&8[&6Bounty&8] &cYou have successfully added a bounty of &b%bounty%$ &cto &b%player%&c!'
+Reload Message: '&8[&6Bounty&8] &chas been successfully reloaded (&bv1.0&c)!'
+Broadcast Death: 'Yes'
+Broadcast Death Message: '&8[&6Bounty&8] &b%killer% &chas killed &b%player% &cand was rewarded with the bounty! &b%bounty%$&c!'
+Broadcast Add Bounty: 'Yes'
+Broadcast Add Bounty Message: '&8[&6Bounty&8] &b%player% &chas added &b%bounty%$ &cbounty to &b%target%&c!'
+Player not on: '&8[&6Bounty&8] &b%player% &cis not online!'
+Insufficient Funds: '&8[&6Bounty&8] &cInsufficient funds!'
+Insufficient Permission: '&8[&6Bounty&8] &cInsufficient Permission!'
+BountAddNotExist: '&8[&6Bounty&8] &b%target% &cdoes not exist!'
+CantAddToYou: '&8[&6Bounty&8] &cYou are not allowed to set a bounty on yourself!'
+Top Bounty: '&8[&6Bounty&8] &b%player% &chas the top bounty of &b%bounty%$&c!'

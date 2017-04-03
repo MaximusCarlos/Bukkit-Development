@@ -1,0 +1,8 @@
+# FireChargeShoot by Maxipad_ (TheOfficialMaxipad)
+# Version 1.0
+# Power: Higher = Bigger explosion.
+# Permissions off = players do not need permission to shoot.
+# Permissions on = players need firecharge.shoot to shoot.
+Power: '10'
+Permissions: 'off'
+Reload Message: '&cFireChargeShoot &bhas been successfully reloaded! &c(v1.0)'

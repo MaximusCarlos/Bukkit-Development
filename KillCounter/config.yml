@@ -1,0 +1,6 @@
+# KillCounter by Maxipad_ (TheOfficialMaxipad)
+
+Reload Message: '&8[&bCounter&8] &7has been reloaded (&bv1.0&7)'
+Insufficient Permission: '&8[&bCounter&8] &7Insufficient Permission!'
+BroadcastOnDeath: 'Yes'
+StatsUsage1: '&8[&bCounter&8] &7Correct usage: &b/cstats <name>'

@@ -1,0 +1,18 @@
+main: me.maxipad.bounty.Bounty
+name: Bounty
+version: 1.0
+commands:
+  bounty:
+    description: Displays player bounty. /bounty <name>
+    aliases: [b]
+  bountyreload:
+    description: Reloads bounty plugin.
+  bountyadd:
+    description: Add bounty to another player!
+  bountytop:
+    description: Displays player with the highest bounty!
+    
+permissions:
+  bounty.reload:
+    description: Reload the plugin.
+    default: op

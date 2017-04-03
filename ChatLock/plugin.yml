@@ -1,0 +1,11 @@
+main: me.maxipad.chatlock.ChatLock
+name: ChatLock
+version: 1.2
+commands:
+  chatlock:
+    description: Locks chat for all players! /cl for short
+    aliases: [cl]
+  chatlockreload:
+    description: Reloads chat control from config. /clr for short
+  chatlock ign <true|false>:
+    description: Show IGN who locked/unlocked

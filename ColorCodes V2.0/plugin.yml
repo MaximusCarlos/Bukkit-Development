@@ -1,0 +1,10 @@
+main: me.maxipad.colorcodes.Main
+name: ColorCodes
+version: 2.0
+description: Color Formatting Asist /cc
+commands:
+  colors:
+    description: Lists out the color codes.
+    aliases: [colours, cc]
+  colorreload:
+    description: Reloads the config from disk.

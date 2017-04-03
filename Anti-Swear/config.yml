@@ -1,0 +1,23 @@
+# MaxAntiSwear plugin by TheOfficialMaxipad
+# Version 1.0
+# Please write all words in lower case.
+# The '&' symbol may be used in the warning messages.
+# Bypass Permission : swear.bypass
+    
+BlockedWords:
+- wordone
+- wordtwo
+- wordthree
+DiscouragedWords:
+- wordfour
+- wordfive
+- wordsix
+KickableWords:
+- wordseven
+- wordeight
+- wordnine
+- nigger
+BlockedWordsWarnMessage: '&4Blocked Word'
+DiscouragedWordsWarnMessage: '&aPlease refrain from using this word!'
+KickableWordsWarnMessage: '&6&lPlease do not say that word again!'
+Reload Message: '&6AntiSwear has been reloaded! Version 1.0'
