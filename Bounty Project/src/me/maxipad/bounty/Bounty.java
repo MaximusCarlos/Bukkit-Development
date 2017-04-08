@@ -42,8 +42,8 @@ public class Bounty extends JavaPlugin {
 		getCommand("bounty").setExecutor(new bountyCheck(this));
 		getCommand("bountyadd").setExecutor(new bountyAdd(this));
 		getCommand("bountyreload").setExecutor(new bountyReload(this));
-		getCommand("bountytop").setExecutor(new bountyTop(this));
-		//getCommand("bountyreset").setExecutor(new bountyReset(this));
+		//getCommand("bountytop").setExecutor(new bountyTop(this));
+		getCommand("bountyreset").setExecutor(new bountyReset(this));
 	}
 
 	public void registerEvents() {
