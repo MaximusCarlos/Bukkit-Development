@@ -34,12 +34,12 @@ public class bountyReset implements CommandExecutor {
 			String uuid = t.getUniqueId().toString();
 
 			if (!(plugin.getConfig().contains("Players." + uuid))) {
-				sender.sendMessage(color(plugin.getConfig().getString("bountyErro2")));
+				sender.sendMessage(color(plugin.getConfig().getString("bountyError2")).replaceAll("%player%", t.getName()));
 				return false;
 			}
 
 			plugin.getConfig().set("Players." + uuid + ".Bounty", 0);
-			sender.sendMessage(color(plugin.getConfig().getString("bountyReset")));
+			sender.sendMessage(color(plugin.getConfig().getString("bountyReset")).replaceAll("%player%", t.getName()).replaceAll("%a%", "'"));
 
 		}
 
