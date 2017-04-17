@@ -1,23 +1,43 @@
 # Bounty by Maxipad_
 # Version 1.0
-# Symbols: %player%, %killer%, %bounty%, %a% (apostrofe)
+# Symbols: %player%, %killer%, %bounty%, %a% (apostrofe), %cooldown%
 # Set Broadcast to 'No' if you don't want them to be broascasted, just sent to players in the event.
+# YOU CAN ONLY EITHER USE MYSQL OR A FILE TO SAVE DATA. BOUNTYTOP DOES NOT WORK WITH FILES.
+# COLUMN NAMES = PlayerName (VARCHAR, 50), CurrentBounty (INT), PlayerUUID (VARCHAR, 50)
+Use SQL or FILE: 'FILE'
 BountyCheckCorrectUsage: '&8[&6Bounty&8] &cCorrect Usage: &b/bounty <name>'
 Invalid Player: '&8[&6Bounty&8] &b%player% &chas never logged onto the server!'
 Bounty Info: '&8[&6Bounty&8] &b%player%%a%s &cbounty is: &b%bounty%&c$'
-Killer Message: '&8[&6Bounty&8] &cYou have claimed &b%player%%a%s &cbounty (&b%bounty%$&c)&b!'
+Killer Message: '&8[&6Bounty&8] &cYou have claimed &b%player% %a% s &cbounty (&b%bounty%$&c)&b!'
 Victim Message: '&8[&6Bounty&8] &b%killer% &chas claimed your bounty (&b%bounty%$&c)&b!'
 BountyAddCorrectUsage1: '&8[&6Bounty&8] &cCorrect usage: &b/bountyadd <name> <amount>'
 BountyAddCorrectUsage2: '&8[&6Bounty&8] &cCorrect usage: &b/bountyadd <name> <amount>'
-BountyAddSuccess: '&8[&6Bounty&8] &cYou have successfully added a bounty of &b%bounty%$ &cto &b%player%&c!'
+BountyAddSuccess: '&8[&6Bounty&8] &cYou have successfully added a bounty of &b%bounty%$
+  &cto &b%player%&c!'
 Reload Message: '&8[&6Bounty&8] &chas been successfully reloaded (&bv1.0&c)!'
-Broadcast Death: 'Yes'
-Broadcast Death Message: '&8[&6Bounty&8] &b%killer% &chas killed &b%player% &cand was rewarded with the bounty! &b%bounty%$&c!'
-Broadcast Add Bounty: 'Yes'
-Broadcast Add Bounty Message: '&8[&6Bounty&8] &b%player% &chas added &b%bounty%$ &cbounty to &b%target%&c!'
+Broadcast Death Message: '&8[&6Bounty&8] &b%killer% &chas killed &b%player% &cand
+  was rewarded with the bounty! &b%bounty%$&c!'
+Broadcast Add Bounty Message: '&8[&6Bounty&8] &b%player% &chas added &b%bounty%$ &cbounty
+  to &b%target%&c!'
 Player not on: '&8[&6Bounty&8] &b%player% &cis not online!'
 Insufficient Funds: '&8[&6Bounty&8] &cInsufficient funds!'
 Insufficient Permission: '&8[&6Bounty&8] &cInsufficient Permission!'
 BountAddNotExist: '&8[&6Bounty&8] &b%target% &cdoes not exist!'
 CantAddToYou: '&8[&6Bounty&8] &cYou are not allowed to set a bounty on yourself!'
-Top Bounty: '&8[&6Bounty&8] &b%player% &chas the top bounty of &b%bounty%$&c!'
+Top Bounty Header: '&8&l&m<------ &6Top %amount% Bounties &8&l&m------>'
+Top Bounties: '&7%ID% &6%player%, %bounty%$'
+bountyError1: '&8[&6Bounty&8] &cCorrect Usage: &b/bountyreset <name>'
+bountyError2: '&8[&6Bounty&8] &b%player% &chas never joined the server!'
+bountyReset: '&8[&6Bounty&8] &b%player%%a%s &cbounty has been reset to &b0$&c!'
+CooldownMessage: '&8[&6Bounty&8] &cPlease wait &b%cooldown% &cseconds before adding
+  another bounty!'
+Broadcast Death: 'Yes'
+Broadcast Add Bounty: 'Yes'
+Cooldown Length: 30
+BountyTopAmount: 5
+Host: host
+Port: 3306
+Database: db
+User: user
+Password: pass
+Table: table
