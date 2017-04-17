@@ -1,20 +1,17 @@
 package me.maxipad.bounty.commands;
 
-import java.util.Arrays;
-
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 import me.maxipad.bounty.Bounty;
 
 public class bountyTop implements CommandExecutor {
 
-	public int count = 0;
-
+	private int i = 0;
 	private Bounty plugin;
 
 	public bountyTop(Bounty pl) {
@@ -22,35 +19,29 @@ public class bountyTop implements CommandExecutor {
 	}
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		i = 0;
 
-		String[] names = new String[Bukkit.getOfflinePlayers().length];
-		int[] bounty = new int[Bukkit.getOfflinePlayers().length];
-		OfflinePlayer[] OfflinePlayers = Bukkit.getServer().getOfflinePlayers();
+		Sql2o sql2o = new Sql2o(
+				"jdbc:mysql://" + plugin.getConfig().getString("Host") + ":" + plugin.getConfig().getString("Port")
+						+ "/" + plugin.getConfig().getString("Database"),
+				plugin.getConfig().getString("User"), plugin.getConfig().getString("Password"));
 
-		for (int i = 0; i < OfflinePlayers.length; i++) {
-			names[i] = OfflinePlayers[i].getName();
-			bounty[i] = plugin.getConfig().getInt("Players." + OfflinePlayers[i].getUniqueId() + ".Bounty");
-			count++;
+		sender.sendMessage(color(plugin.getConfig().getString("Top Bounty Header")
+				.replaceAll("%amount%", plugin.getConfig().getString("BountyTopAmount"))));
+
+		try (Connection connection = sql2o.open()) {
+			connection.createQuery("SELECT * FROM " + plugin.getConfig().getString("Table") + " ORDER BY CurrentBounty DESC LIMIT " + plugin.getConfig().getString("BountyTopAmount"))
+					.executeAndFetch(SQLReport.class).forEach(report -> {
+						i++;
+						sender.sendMessage(color(plugin.getConfig().getString("Top Bounties")).replaceAll("%ID%", Integer.toString(i))
+								.replaceAll("%player%", report.getPlayerName())
+								.replaceAll("%bounty%", Integer.toString(report.getCurrentBounty())));
+					});
 		}
-
-		Arrays.sort(bounty);
-		sender.sendMessage(color("&8&l&m<---[&6Top Server Bounties&8&l&m]--->"));
-
-		for (int i = 0; i < bounty.length; i++) {
-			if (bounty[bounty.length - (i + 1)] == 0) {
-				// do nothing
-			} else {
-				sender.sendMessage(color("&c" + (i + 1) + ". &b" + names[bounty.length - (i + 1)] + "&c, &b"
-						+ Integer.toString(bounty[bounty.length - (i + 1)]) + "$"));
-			}
-		}
-
 		return false;
-
 	}
 
 	public String color(String msg) {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
-
 }

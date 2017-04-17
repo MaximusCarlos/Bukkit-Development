@@ -11,6 +11,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 import me.maxipad.bounty.Bounty;
 import net.milkbowl.vault.economy.Economy;
@@ -25,6 +27,9 @@ public class bountyAdd implements CommandExecutor {
 	}
 
 	public Economy econ = null;
+	private int DBBounty = 0;
+	private int id = 0;
+	private int bounty = 0;
 
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>(); // stores
 																		// cool
@@ -36,7 +41,7 @@ public class bountyAdd implements CommandExecutor {
 	// without a hash map only one player could properly use a cool down despite
 	// the scheduled task.
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "unused" })
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		if (!(sender instanceof Player)) {
@@ -69,7 +74,13 @@ public class bountyAdd implements CommandExecutor {
 			setupEconomy();
 			OfflinePlayer t = player.getServer().getOfflinePlayer(args[0]);
 			String uuid = t.getUniqueId().toString();
-			String stringBounty = args[1];
+			String stringBounty = "";
+			if(plugin.getConfig().getString("Use SQL or FILE").equalsIgnoreCase("FILE")){
+				stringBounty = args[1];
+			} else {
+				stringBounty = "0";
+			}
+			
 
 			if (sender == t) {
 				sender.sendMessage(color(plugin.getConfig().getString("CantAddToYou")));
@@ -86,21 +97,93 @@ public class bountyAdd implements CommandExecutor {
 						.replaceAll("%player%", t.getName()).replaceAll("%bounty%", stringBounty));
 				return false;
 			}
+			
+			if (plugin.getConfig().getString("Use SQL or FILE").equalsIgnoreCase("FILE")) {
+				int bounty = plugin.getConfig().getInt("Players." + uuid + ".Bounty");
+				int addbounty = Integer.parseInt(stringBounty);
+				
+			}
+			
+			if(plugin.getConfig().getString("Use SQL or FILE").equalsIgnoreCase("SQL")){
+				Sql2o sql2o = new Sql2o("jdbc:mysql://" + plugin.getConfig().getString("Host") + ":"
+						+ plugin.getConfig().getString("Port") + "/" + plugin.getConfig().getString("Database"),
+						plugin.getConfig().getString("User"), plugin.getConfig().getString("Password"));
 
-			int bounty = plugin.getConfig().getInt("Players." + uuid + ".Bounty");
-			int addbounty = Integer.parseInt(stringBounty);
+				try (Connection connection = sql2o.open()) {
+					connection
+							.createQuery("SELECT * FROM " + plugin.getConfig().getString("Table")
+									+ " WHERE PlayerName = '" + args[0] + "'")
+							.executeAndFetch(SQLReport.class).forEach(report -> {
+								DBBounty = report.getCurrentBounty();
+							});
+				}
+				
+				
+			}
+			
+			EconomyResponse r = econ.withdrawPlayer(sender.getName(), Integer.parseInt(stringBounty));
+			EconomyResponse r2 = econ.withdrawPlayer(sender.getName(), Integer.parseInt(args[1]));
+			
+			if (r.transactionSuccess() || r2.transactionSuccess()) {
 
-			EconomyResponse r = econ.withdrawPlayer(sender.getName(), addbounty);
-			if (r.transactionSuccess()) {
-				plugin.getConfig().set("Players." + uuid + ".Bounty", bounty + addbounty);
-				plugin.saveConfig();
+				if (plugin.getConfig().getString("Use SQL or FILE").equalsIgnoreCase("FILE")) {
+					plugin.getConfig().set("Players." + uuid + ".Bounty", Integer.parseInt(args[1]) + bounty);
+					plugin.saveConfig();
+
+				}
 				sender.sendMessage(color(plugin.getConfig().getString("BountyAddSuccess"))
-						.replaceAll("%player%", t.getName()).replaceAll("%bounty%", stringBounty));
+						.replaceAll("%player%", t.getName()).replaceAll("%bounty%", args[1]));
 
 				if (plugin.getConfig().getString("Broadcast Add Bounty").equalsIgnoreCase("Yes")) {
 					Bukkit.broadcastMessage(color(plugin.getConfig().getString("Broadcast Add Bounty Message"))
-							.replaceAll("%player%", player.getName()).replaceAll("%bounty%", stringBounty)
+							.replaceAll("%player%", player.getName()).replaceAll("%bounty%", args[1])
 							.replaceAll("%target%", t.getName()));
+
+					if (plugin.getConfig().getString("Use SQL or FILE").equalsIgnoreCase("SQL")) {
+
+						Sql2o sql2o = new Sql2o("jdbc:mysql://" + plugin.getConfig().getString("Host") + ":"
+								+ plugin.getConfig().getString("Port") + "/" + plugin.getConfig().getString("Database"),
+								plugin.getConfig().getString("User"), plugin.getConfig().getString("Password"));
+
+						try (Connection connection = sql2o.open()) {
+
+							String[] query = new String[3];
+
+							query[0] = "insert into " + plugin.getConfig().getString("Table")
+									+ "(PlayerName, CurrentBounty, PlayerUUID) "
+									+ "values (:PlayerName, :CurrentBounty, :PlayerUUID)";
+							query[1] = "DELETE FROM " + plugin.getConfig().getString("Table") + " WHERE PlayerUUID = '"
+									+ uuid + "'";
+							query[2] = "insert into " + plugin.getConfig().getString("Table")
+									+ "(PlayerName, CurrentBounty, PlayerUUID) "
+									+ "values (:PlayerName, :CurrentBounty, :PlayerUUID)";
+
+							id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+
+								int i = 0;
+
+								public void run() {
+									if (i == 0 || i == 2) {
+										connection.createQuery(query[i]).addParameter("PlayerName", t.getName())
+												.addParameter("CurrentBounty", Integer.parseInt(args[1]) + DBBounty)
+												.addParameter("PlayerUUID", uuid).executeUpdate();
+									}
+
+									if (i == 1) {
+										connection.createQuery(query[i]).executeUpdate();
+									}
+
+									if (i == 3) {
+										Bukkit.getScheduler().cancelTask(id);
+									}
+
+									i++;
+								}
+							}, 0, 5);
+						}
+
+					}
+
 				}
 
 				cooldown.put(player.getUniqueId(),
