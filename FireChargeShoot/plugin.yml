@@ -1,6 +1,0 @@
-main: me.maxipad.firechargeshoot.FireChargeShoot
-version: 1.0
-name: FireChargeShoot
-commands:
-  firereload:
-    description: Reloads Plugin.
