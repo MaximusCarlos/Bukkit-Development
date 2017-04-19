@@ -15,6 +15,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import me.maxipad.bounty.Bounty;
+import me.maxipad.bounty.backend.SQLReport;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 

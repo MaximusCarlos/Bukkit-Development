@@ -1,4 +1,4 @@
-# Bounty by Maxipad_
+# BountyPlus by MaximusCarlos
 # Version 1.0
 # Symbols: %player%, %killer%, %bounty%, %a% (apostrofe), %cooldown%
 # Set Broadcast to 'No' if you don't want them to be broascasted, just sent to players in the event.
@@ -40,4 +40,4 @@ Port: 3306
 Database: db
 User: user
 Password: pass
-Table: table
+Table: Bounties

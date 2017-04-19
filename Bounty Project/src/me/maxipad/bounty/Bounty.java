@@ -2,6 +2,7 @@ package me.maxipad.bounty;
 
 import java.util.logging.Logger;
 
+import org.bukkit.ChatColor;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -15,11 +16,12 @@ import me.maxipad.bounty.commands.bountyTop;
 import me.maxipad.bounty.events.PlayerDeath;
 import me.maxipad.bounty.events.PlayerJoin;
 import net.milkbowl.vault.economy.Economy;
+import me.maxipad.bounty.backend.InitializeTable;
 
 public class Bounty extends JavaPlugin {
 
 	public Economy econ = null;
-	
+
 	public Permission bountyReload = new Permission("bounty.reload");
 
 	public void onEnable() {
@@ -30,6 +32,14 @@ public class Bounty extends JavaPlugin {
 		registerCommands();
 		registerEvents();
 		registerConfig();
+
+		InitializeTable initializeTable = new InitializeTable(this);
+
+		try {
+			initializeTable.createTable();
+		} catch (Exception e) {
+			System.out.println(ChatColor.DARK_RED + "[BountyPlus] [SQL] Unable to create a table. Check your config and reload the plugin.");
+		}
 	}
 
 	public void onDisable() {
@@ -44,8 +54,7 @@ public class Bounty extends JavaPlugin {
 		getCommand("bountyreload").setExecutor(new bountyReload(this));
 		getCommand("bountyreset").setExecutor(new bountyReset(this));
 		getCommand("bountytop").setExecutor(new bountyTop(this));
-		
-		
+
 	}
 
 	public void registerEvents() {

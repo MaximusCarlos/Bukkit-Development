@@ -10,6 +10,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import me.maxipad.bounty.Bounty;
+import me.maxipad.bounty.backend.SQLReport;
 
 public class bountyCheck implements CommandExecutor {
 
