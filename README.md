@@ -1,2 +1,2 @@
-# Bukkit-Development
-Plugins made for bukkit servers.
+# Bukkit-Spigot-Development
+A few of my bukkit / spigot plugins.
