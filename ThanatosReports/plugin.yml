@@ -1,0 +1,14 @@
+main: xyz.maximuscarlos.thanatosreports.Main
+name: ThanatosReports
+version: 1.0
+author: MaximusCarlos
+depend: [ThanatosBot]
+commands:
+  report:
+    description: Report a player!
+    aliases: [helpop]
+  reports:
+    description: View and delete reports.
+  reportsreload:
+    description: Reload ThanatosReports
+  
